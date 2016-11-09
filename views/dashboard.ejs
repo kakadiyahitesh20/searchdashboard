@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <% include head %>
+</head>
+<body  ng-app="myapp">
+<% include header_logged.ejs %>
+<div class="container-fluid">
+    <section class="container">
+        <div class="container-page">
+            <form>
+            <div class="col-md-12">
+                <div class="form-group" style="margin-top: 20px">
+                    <div class="col-md-2">
+                    <label for="search">Search Keyword :</label>
+                        </div>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" id="search"></input>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="col-lg-2">
+                    <label for="search">Choose Category :</label>
+                </div>
+                <div class="col-md-4">
+                <div class="form-group">
+                <% for(var i=0; i<categorylist.length; i++) {%>
+                    <div class="checkbox">
+                        <label>
+                        <input id="<%= categorylist[i].id %>" type="checkbox"><%= categorylist[i].name %></input>
+                        </label>
+                    </div>
+                <ul>
+                    <% for(var j=0; j<subcategorylist.length; j++) {%>
+                    <% if(categorylist[i].id == subcategorylist[j].category_id) {%>
+                    <div class="checkbox">
+                    <label>
+                    <input id="<%= subcategorylist[j].id %>" type="checkbox"><%= subcategorylist[j].name %>
+                    </label>
+                    </div>
+                    <% } %>
+                    <% } %>
+                </ul>
+                <% } %>
+                </div>
+                </div>
+            </div>
+                <div class="col-md-12">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-4"><button type="submit" id="subcategory" class="btn btn-primary">Submit</button></div>
+                </div>
+                </form>
+        </div>
+    </section>
+</div>
+
+<% include footer %>
+</body>
+</html>

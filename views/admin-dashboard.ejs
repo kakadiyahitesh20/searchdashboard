@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <% include head %>
+</head>
+<body  ng-app="myapp">
+<% include admin-header.ejs %>
+<div class="container-fluid">
+    <section class="container">
+        <div class="container-page">
+            <div class="col-md-12">
+                <div class="col-md-6">
+                    <h3>Add New Category</h3>
+                    <form>
+                        <div class="form-group">
+                            <label for="inputcategory">Category Name</label>
+                            <input type="text" class="form-control" id="inputcategory" placeholder="Category" style="width: 50%;">
+                            <label for="description" style="margin-top: 10px;">Description</label>
+                            <textarea name="description" class="form-control" id="description" style="width: 50%;height: 100px;"></textarea>
+                        </div>
+                        <button type="submit" id="submit" class="btn btn-primary">Submit</button>
+                        <p id="msgcat" style="display: none;">Category saved successfully</p>
+                    </form>
+                </div>
+                <div class="col-md-6">
+                    <h3>Add New Subcategory</h3>
+                    <form>
+                        <div class="form-group">
+                        <label for="inputcategory">Sub Category Name</label>
+                        <input type="text" class="form-control" id="inputsubcategory" placeholder="Sub Category" style="width: 50%;">
+                        <label for="description" style="margin-top: 10px;">Description</label>
+                        <textarea name="description" class="form-control" id="subdescription" style="width: 50%;height: 100px;"></textarea>
+                        <label for="registeredIndicator">Main Category</label>
+                        <select class="input-medium form-control" id="categoryid"  style="width: 50%;">
+                         <option value="">Select</option>
+                            <% for(var i=0; i<category.length; i++) {%>
+                            <option value="<%= category[i].id %>"><%= category[i].name %></option>
+                            <% } %>
+                          </select>
+                        </div>
+                        <button type="submit" id="subcategory" class="btn btn-primary">Submit</button>
+                        <p id="msgsub" style="display: none;">Sub Category saved successfully</p>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </section>
+</div>
+
+<% include footer %>
+</body>
+</html>
+<script>
+    $(document).ready(function(){
+        var category,description;
+        $("#submit").click(function(){
+            category=$("#inputcategory").val();
+            description=$("#description").val();
+            /*
+             * Perform some validation here.
+             */
+            $.post("/addCategory",{category:category,description:description},function(data){
+                if(data==='done')
+                {
+                    window.location.href="/admin-dashboard";
+                    $("#msgcat").show();
+                }
+                else {
+                    // window.location.href="/login";
+                    res.render('login.ejs',{message:'errorMessage'});
+                    //res.render('login',{user: "Great User",title:"homepage"});
+                }
+            });
+        });
+        $("#subcategory").click(function(){
+           var subcategory=$("#inputsubcategory").val();
+           var subdescription=$("#subdescription").val();
+            var categoryid = $("#categoryid").val();
+            /*
+             * Perform some validation here.
+             */
+            $.post("/addSubCategory",{subcategory:subcategory,subdescription:subdescription,categoryid:categoryid},function(data){
+                if(data==='done')
+                {
+                    window.location.href="/admin-dashboard";
+                    $("#msgsub").show();
+                }
+                else {
+                    // window.location.href="/login";
+                    res.render('login.ejs',{message:'errorMessage'});
+                    //res.render('login',{user: "Great User",title:"homepage"});
+                }
+            });
+        });
+    });
+</script>
