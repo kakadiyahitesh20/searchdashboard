@@ -11,34 +11,34 @@
             <div class="col-md-12">
                 <div class="col-md-6">
                     <h3>Add New Category</h3>
-                    <form>
+                    <form name="category">
                         <div class="form-group">
                             <label for="inputcategory">Category Name</label>
-                            <input type="text" class="form-control" id="inputcategory" placeholder="Category" style="width: 50%;">
+                            <input type="text" class="form-control" id="inputcategory" required ng-model="catname" placeholder="Category" style="width: 50%;">
                             <label for="description" style="margin-top: 10px;">Description</label>
-                            <textarea name="description" class="form-control" id="description" style="width: 50%;height: 100px;"></textarea>
+                            <textarea name="description" class="form-control" required ng-model="catdesc" id="description" style="width: 50%;height: 100px;"></textarea>
                         </div>
-                        <button type="submit" id="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" id="submit" class="btn btn-primary" ng-disabled="category.$invalid">Submit</button>
                         <p id="msgcat" style="display: none;">Category saved successfully</p>
                     </form>
                 </div>
                 <div class="col-md-6">
                     <h3>Add New Subcategory</h3>
-                    <form>
+                    <form name="subcategory">
                         <div class="form-group">
                         <label for="inputcategory">Sub Category Name</label>
-                        <input type="text" class="form-control" id="inputsubcategory" placeholder="Sub Category" style="width: 50%;">
+                        <input type="text" class="form-control" id="inputsubcategory" required ng-model="subcat" placeholder="Sub Category" style="width: 50%;">
                         <label for="description" style="margin-top: 10px;">Description</label>
-                        <textarea name="description" class="form-control" id="subdescription" style="width: 50%;height: 100px;"></textarea>
+                        <textarea name="description" class="form-control" required ng-model="subcatdesc" id="subdescription" style="width: 50%;height: 100px;"></textarea>
                         <label for="registeredIndicator">Main Category</label>
-                        <select class="input-medium form-control" id="categoryid"  style="width: 50%;">
+                        <select class="input-medium form-control" id="categoryid" required ng-model="categoryid"  style="width: 50%;">
                          <option value="">Select</option>
                             <% for(var i=0; i<category.length; i++) {%>
                             <option value="<%= category[i].id %>"><%= category[i].name %></option>
                             <% } %>
                           </select>
                         </div>
-                        <button type="submit" id="subcategory" class="btn btn-primary">Submit</button>
+                        <button type="submit" id="subcategory" class="btn btn-primary" ng-disabled="subcategory.$invalid">Submit</button>
                         <p id="msgsub" style="display: none;">Sub Category saved successfully</p>
                     </form>
                 </div>
