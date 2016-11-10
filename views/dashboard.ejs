@@ -49,9 +49,13 @@
             </div>
                 <div class="col-md-12">
                     <div class="col-md-2"></div>
-                    <div class="col-md-4"><button type="submit" id="subcategory" class="btn btn-primary" ng-disabled="searchdata.$invalid">Submit</button></div>
+                    <div class="col-md-4"><button type="submit" id="submit" class="btn btn-primary" ng-disabled="searchdata.$invalid">Submit</button></div>
                 </div>
                 </form>
+        </div>
+
+        <div class="col-md-12" id="searchresult">
+
         </div>
     </section>
 </div>
@@ -59,3 +63,42 @@
 <% include footer %>
 </body>
 </html>
+<script>
+    $(document).ready(function(){
+        $("#submit").click(function(){
+            var search = $("#search").val();
+            /*
+             * Perform some validation here.
+             */
+            getAndRenderData(search);
+        });
+        function getAndRenderData(search) {
+            var data = JSON.stringify({ keyword: search });
+            $.ajax({
+                url: "http://localhost:3000/searchResult/",
+                // the URL for the request
+                type: "POST",
+                // whether this is a POST or GET request
+                contentType: "application/json",
+                data: data,
+                // the type of data we expect back
+                success: function (responseJson) {
+                    var obj = jQuery.parseJSON(responseJson);
+                    $('#searchresult').empty();
+                    $.each(obj, function(key,value) {
+                        $('#searchresult').append('<div class="col-md-12 list_result"><h4>'+value.name+'</h4><p>'+value.description+'</p></div>');
+                    });
+
+                },
+                error: function (xhr, status) {
+                    // code run if request fails; raw request and status
+                    console.log("Sorry, there was a problem!");
+                },
+                complete: function (xhr, status) {  	// code to run regardless of success or failure
+                    console.log("The request is complete!");
+                }
+            })
+        }
+    });
+</script>
+

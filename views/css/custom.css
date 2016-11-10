@@ -3,3 +3,9 @@ i.glyphicon.glyphicon-calendar.fa.fa-calendar {
     margin-top: 34px;
     margin-left: -20px;
 }
+.list_result {
+    border: 1px solid #ddd;
+}
+#searchresult {
+    margin-top: 30px;
+}

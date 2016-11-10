@@ -42,6 +42,22 @@
                         <p id="msgsub" style="display: none;">Sub Category saved successfully</p>
                     </form>
                 </div>
+                <div class="col-md-6">
+                    <h3>Remove Category</h3>
+                    <form name="removecategory">
+                        <div class="form-group">
+                            <label for="registeredIndicator">Chooce Category</label>
+                            <select class="input-medium form-control" id="categoryid" required ng-model="categoryid"  style="width: 50%;">
+                                <option value="">Select</option>
+                                <% for(var i=0; i<category.length; i++) {%>
+                                <option value="<%= category[i].id %>"><%= category[i].name %></option>
+                                <% } %>
+                            </select>
+                        </div>
+                        <button type="submit" id="removecategory" class="btn btn-danger" ng-disabled="removecategory.$invalid">Delete</button>
+                        <p id="removecat" style="display: none;">Category removed successfully</p>
+                    </form>
+                </div>
             </div>
 
         </div>
@@ -85,6 +101,24 @@
                 {
                     window.location.href="/admin-dashboard";
                     $("#msgsub").show();
+                }
+                else {
+                    // window.location.href="/login";
+                    res.render('login.ejs',{message:'errorMessage'});
+                    //res.render('login',{user: "Great User",title:"homepage"});
+                }
+            });
+        });
+        $("#removecategory").click(function(){
+            var categoryid = $("#categoryid").val();
+            /*
+             * Perform some validation here.
+             */
+            $.post("/removeCategory",{categoryid:categoryid},function(data){
+                if(data==='done')
+                {
+                    window.location.href="/admin-dashboard";
+                    $("#removecat").show();
                 }
                 else {
                     // window.location.href="/login";
