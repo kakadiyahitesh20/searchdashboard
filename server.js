@@ -5,7 +5,8 @@ var passport = require('passport');
 var crypto = require('crypto');
 var async = require('async');
 var app			=	express();
-
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
 /*hash = require('./pass').hash;*/
 var LocalStrategy   = require('passport-local').Strategy;
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -18,44 +19,69 @@ app.use(passport.session());
     app.use("/",router);
     app.use(express.static('views'));
     app.set('view engine', 'ejs');
-
 //app.engine('.html', require('ejs').__express);
 var path = __dirname + '/views/';
+// usernames which are currently connected to the chat
+var connection = require('./app/config');
+var routes = require('./app/routes')(app);
+var usernames = {};
 
-/*router.use(function (req,res,next) {
-  console.log("/" + req.method);
-  next();
+// rooms which are currently available in chat
+var rooms = ['Room'];
+
+io.sockets.on('connection', function (socket) {
+
+    // when the client emits 'adduser', this listens and executes
+    socket.on('adduser', function(username){
+        // store the username in the socket session for this client
+        socket.username = username;
+        // store the room name in the socket session for this client
+        socket.room = 'Room';
+        // add the client's username to the global list
+        usernames[username] = username;
+        // send client to room 1
+        socket.join('Room');
+        // echo to client they've connected
+        socket.emit('updatechat', username , 'you have connected Now..!!!');
+        // echo to room 1 that a person has connected to their room
+        socket.broadcast.to('Admin').emit('updatechat', username, ' has connected to this room');
+        socket.emit('updaterooms', rooms, 'Room');
+    });
+
+    // when the client emits 'sendchat', this listens and executes
+    socket.on('sendchat', function (data) {
+        // we tell the client to execute 'updatechat' with 2 parameters
+        io.sockets.in(socket.room).emit('updatechat', socket.username, data);
+    });
+
+    socket.on('switchRoom', function(newroom){
+        // leave the current room (stored in session)
+        socket.leave(socket.room);
+        // join new room, received as function parameter
+        socket.join(newroom);
+        socket.emit('updatechat', 'SERVER', 'you have connected to '+ newroom);
+        // sent message to OLD room
+        socket.broadcast.to(socket.room).emit('updatechat', 'SERVER', socket.username+' has left this room');
+        // update socket session room title
+        socket.room = newroom;
+        socket.broadcast.to(newroom).emit('updatechat', 'SERVER', socket.username+' has joined this room');
+        socket.emit('updaterooms', rooms, newroom);
+    });
+
+    // when the user disconnects.. perform this
+    socket.on('disconnect', function(){
+        // remove the username from global usernames list
+        delete usernames[socket.username];
+        // update list of users in chat, client-side
+        io.sockets.emit('updateusers', usernames);
+        // echo globally that this client has left
+        socket.broadcast.emit('updatechat',  socket.username ,' has disconnected');
+        socket.leave(socket.room);
+    });
 });
 
-router.get("/",function(req,res){
-  res.sendFile(path + "index.ejs");
-});
 
-router.get("/register",function(req,res){
-  res.sendFile(path + "register.ejs");
-});
-
-router.get("/login",function(req,res){
-  res.sendFile(path + "login.ejs");
-});*/
-//mysql 
-var mysql = require('mysql');
-var connection = mysql.createConnection({
-    connectionLimit : 100, //focus it
-    host : 'localhost',
-    user : 'root',
-    password : '',
-    database : 'searchdb'
-});
-var users = [
-    { name: 'tobi', email: 'tobi@learnboost.com' }
-];
-console.log(users);
-/*app.get('/', function(req, res){
-    res.render('index',{user: "Great User",title:"homepage"});
-})*/
 var sess;
-
 app.get('/',function(req,res){
     sess=req.session;
     if(sess.email)
@@ -66,8 +92,174 @@ app.get('/',function(req,res){
         res.render('index');
     }
 });
+app.get('/dashboard', function (req, res) {
+    sess = req.session;
+    if (sess.email) {
+        connection.query("select * from  users where email = '" + sess.email + "'", function (err, rows) {
+            //connection.query("SELECT category.id,category.name as categoryname,subcategory.id as subcategoryid,subcategory.name as subcategoryname,category.description as categorydescription,subcategory.description as subcategorydescription FROM category INNER JOIN subcategory ON category.id=subcategory.category_id", function (err, result2) {
+            connection.query("select * from  category", function (err, result2) {
+                connection.query("select * from  subcategory", function (err, result3) {
+                    console.log(result3);
+                    // var usersinfo = JSON.stringify(rows);
+                    // console.log(usersinfo);
+                    //res.render('profile',{usersinfo:rows,users: users});
+
+                    res.render('dashboard', {
+                        user: "Great User",
+                        session: req.session,
+                        usersinfo: rows,
+                        categorylist: result2,
+                        subcategorylist: result3
+                    });
+                });
+            });
+        });
+        //res.redirect('dashboard');
+    }
+    else {
+        res.redirect('/');
+    }
+
+});
+app.get('/live-chat', function (req, res) {
+    sess = req.session;
+    if (sess.email) {
+        connection.query("select * from  users where email = '" + sess.email + "'", function (err, rows) {
+            //console.log(rows);
+            // var usersinfo = JSON.stringify(rows);
+            // console.log(usersinfo);
+            res.render('live-chat', {usersinfo: rows});
+        });
+    }
+    else {
+        res.redirect('login');
+    }
+});
+app.get('/admin-live-chat', function (req, res) {
+    sess = req.session;
+    if (sess.email) {
+        connection.query("select * from  users where email = '" + sess.email + "'", function (err, rows) {
+            //console.log(rows);
+            // var usersinfo = JSON.stringify(rows);
+            // console.log(usersinfo);
+            res.render('admin-live-chat', {usersinfo: rows});
+        });
+    }
+    else {
+        res.redirect('admin');
+    }
+});
+app.get('/admin', function (req, res) {
+    sess = req.session;
+    if (sess.email) {
+        res.render('admin-dashboard');
+    }
+    else {
+        res.render('admin');
+    }
+});
+app.get('/admin-dashboard', function (req, res) {
+    sess = req.session;
+    if (sess.email) {
+        /*connection.query("select * from  users where email = '"+sess.email+"'",function(err,rows) {
+         res.render('admin-dashboard', {user: "Great User", session: req.session, usersinfo: rows});
+         });*/
+        connection.query("select * from  users where email = '" + sess.email + "'", function (err, result1) {
+            connection.query("select * from  category", function (err, result2) {
+                res.render('admin-dashboard', {usersinfo: result1, category: result2});
+            });
+        });
+        /*async.parallel([
+         function(callback) { connection.query("select * from  category",result) }
+         /!*function(callback) { db.query(QUERY2, callback) }*!/
+         ], function(err, results) {
+         console.log(results);
+         res.render('admin-dashboard', { usersinfo : results[0] });
+         });*/
+    }
+    else {
+        res.redirect('/admin');
+    }
+});
+app.get('/profile', function (req, res) {
+    sess = req.session;
+    if (sess.email) {
+        connection.query("select * from  users where email = '" + sess.email + "'", function (err, rows) {
+            //console.log(rows);
+            // var usersinfo = JSON.stringify(rows);
+            // console.log(usersinfo);
+            res.render('profile', {usersinfo: rows});
+        });
+
+        //res.render('index', {data : testimonials});
+        //res.redirect('dashboard');
+    }
+    else {
+        res.redirect('/login');
+    }
+
+
+});
+app.get('/editprofile', function (req, res) {
+    sess = req.session;
+    if (sess.email) {
+        connection.query("select * from  users where email = '" + sess.email + "'", function (err, rows) {
+            //console.log(rows);
+            // var usersinfo = JSON.stringify(rows);
+            // console.log(usersinfo);
+            res.render('editprofile', {usersinfo: rows});
+        });
+
+        //res.render('index', {data : testimonials});
+        //res.redirect('dashboard');
+    }
+    else {
+        res.redirect('/login');
+    }
+
+
+});
+app.get('/UserList', function (req, res) {
+    sess = req.session;
+    if (sess.email) {
+        connection.query("select * from  users", function (err, rows) {
+            connection.query("select * from  users where email = '" + sess.email + "'", function (err, rows1) {
+                res.render('UserList', {userlist: rows,usersinfo : rows1});
+            });
+
+        });
+
+        //res.render('index', {data : testimonials});
+        //res.redirect('dashboard');
+    }
+    else {
+        res.redirect('/login');
+    }
+
+
+});
+app.get('/ChangePassword', function (req, res) {
+    sess = req.session;
+    if (sess.email) {
+        connection.query("select * from  users where email = '" + sess.email + "'", function (err, rows) {
+            //console.log(rows);
+            // var usersinfo = JSON.stringify(rows);
+            // console.log(usersinfo);
+            res.render('ChangePassword', {usersinfo: rows});
+        });
+
+        //res.render('index', {data : testimonials});
+        //res.redirect('dashboard');
+    }
+    else {
+        res.redirect('/login');
+    }
+
+
+});
+
 // login page
-app.get('/login', function(req, res) {
+/*app.get('/login', function(req, res) {
     sess=req.session;
     if(sess.email)
     {
@@ -76,43 +268,8 @@ app.get('/login', function(req, res) {
     else{
         res.render('login');
     }
-});
-app.get('/admin',function(req,res){
-    sess=req.session;
-    if(sess.email)
-    {
-        res.render('admin-dashboard');
-    }
-    else{
-        res.render('admin');
-    }
-});
-app.get('/admin-dashboard', function(req, res) {
-    sess=req.session;
-    if(sess.email)
-    {
-        /*connection.query("select * from  users where email = '"+sess.email+"'",function(err,rows) {
-            res.render('admin-dashboard', {user: "Great User", session: req.session, usersinfo: rows});
-        });*/
-        connection.query("select * from  users where email = '"+sess.email+"'", function(err, result1) {
-            connection.query("select * from  category", function(err, result2) {
-                console.log(result1);
-                console.log(result2);
-                res.render('admin-dashboard', { usersinfo : result1, category: result2 });
-            });
-        });
-        /*async.parallel([
-            function(callback) { connection.query("select * from  category",result) }
-            /!*function(callback) { db.query(QUERY2, callback) }*!/
-        ], function(err, results) {
-            console.log(results);
-            res.render('admin-dashboard', { usersinfo : results[0] });
-        });*/
-    }
-    else{
-        res.redirect('/admin');
-    }
-});
+});*/
+
 app.post('/adminlogin',function(req,res){
 
     var hashnew = crypto.createHash('md5').update(req.body.pass).digest("hex");
@@ -137,25 +294,24 @@ app.post('/adminlogin',function(req,res){
 });
 app.post('/login',function(req,res){
 
-    var hashnew = crypto.createHash('md5').update(req.body.pass).digest("hex");
-    connection.query("select * from users where email = '"+req.body.email+"' and password = '"+hashnew+"'",function(err,rows){
-        console.log(rows);
-        console.log("above row object");
-        numRows = rows.length;
-        console.log(numRows);
-        if (err)
-            return done(err);
-        if (numRows == 0) {
-           // return done(null, false, req.flash('signupMessage', 'That email is already taken.'));
-            res.end('Please enter correct credentials.');
-        }
-        else {
-            sess=req.session;
-            sess.email=req.body.email;
-            res.end('done');
-        }
+        var hashnew = crypto.createHash('md5').update(req.body.pass).digest("hex");
+        connection.query("select * from users where email = '" + req.body.email + "' and password = '" + hashnew + "'", function (err, rows) {
+            console.log(rows);
+            console.log("above row object");
+            numRows = rows.length;
+            console.log(numRows);
+            if (err)
+                return done(err);
+            if (numRows == 0) {
+                // return done(null, false, req.flash('signupMessage', 'That email is already taken.'));
+                res.end('Please enter correct credentials.');
+            }
+            else {
+                sess = req.session;
+                sess.email = req.body.email;
+                res.end('done');
+            }
         });
-
 });
 
 app.post('/addCategory',function(req,res){
@@ -259,8 +415,57 @@ app.post('/signup',function(req,res){
         }
     });
 });
+app.post('/editinfo',function(req,res){
+            var created = new Date();
+            var queryString = "UPDATE users SET name='" + req.body.name + "',dob='" + req.body.dob + "',organization='" + req.body.org + "',created='" + created + "' WHERE email='" + req.body.email + "'";
+            console.log(queryString);
+            connection.query(queryString, function (error, results) {
+                if (error) {
+                    throw error;
+                }
+                else {
+                    //res.send('Inserted Successfully!');
+                    res.end('success');
+
+                    // res.write("Looked everywhere, but couldn't find that page at all!\n");
+                }
+            });
+    });
+app.post('/removeuser',function(req,res){
+    var queryString = "DELETE FROM users WHERE id='" + req.body.id + "'";
+    console.log(queryString);
+    connection.query(queryString, function (error, results) {
+        if (error) {
+            throw error;
+        }
+        else {
+            //res.send('Inserted Successfully!');
+            res.end('success');
+
+            // res.write("Looked everywhere, but couldn't find that page at all!\n");
+        }
+    });
+});
+app.post('/changePassword',function(req,res){
+    var hashnew = crypto.createHash('md5').update(req.body.password).digest("hex");
+    var queryString = "UPDATE users SET password='" + hashnew + "' WHERE email='" + sess.email + "'";
+    console.log(queryString);
+    connection.query(queryString, function (error, results) {
+        if (error) {
+            throw error;
+        }
+        else {
+            //res.send('Inserted Successfully!');
+            res.type('text/plain');
+            res.json(results);
+            // res.end('done');
+
+            // res.write("Looked everywhere, but couldn't find that page at all!\n");
+        }
+    });
+});
 // Register page
-app.get('/register', function(req, res) {
+/*app.get('/register', function(req, res) {
     sess=req.session;
     if(sess.email)
     {
@@ -269,7 +474,7 @@ app.get('/register', function(req, res) {
     else{
         res.render('register',{user: "Great User",title:"homepage"});
     }
-});
+});*/
 app.get('/dashboard',function(req,res){
     sess=req.session;
     if(sess.email)
@@ -295,7 +500,7 @@ app.get('/dashboard',function(req,res){
     }
 
 });
-app.get('/logout',function(req,res){
+/*app.get('/logout',function(req,res){
 
     req.session.destroy(function(err){
         if(err){
@@ -307,28 +512,8 @@ app.get('/logout',function(req,res){
         }
     });
 
-});
-app.get('/profile',function(req,res){
-    sess=req.session;
-    if(sess.email)
-    {
-        connection.query("select * from  users where email = '"+sess.email+"'",function(err,rows) {
-            //console.log(rows);
-           // var usersinfo = JSON.stringify(rows);
-           // console.log(usersinfo);
-            res.render('profile',{usersinfo:rows,users: users});
-        });
+});*/
 
-        //res.render('index', {data : testimonials});
-        //res.redirect('dashboard');
-    }
-    else
-    {
-        res.redirect('/login');
-    }
-
-
-});
 
 
 //opening view
@@ -408,10 +593,6 @@ passport.use('local-signup', new LocalStrategy({
             });
         }));*/
 
-
-
-
-
-app.listen(3000,function(){
+http.listen(3000,function(){
   console.log("Live at Port 3000");
 });
