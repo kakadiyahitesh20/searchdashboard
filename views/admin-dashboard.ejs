@@ -17,6 +17,7 @@
                             <input type="text" class="form-control" id="inputcategory" required ng-model="catname" placeholder="Category" style="width: 50%;">
                             <label for="description" style="margin-top: 10px;">Description</label>
                             <textarea name="description" class="form-control" required ng-model="catdesc" id="description" style="width: 50%;height: 100px;"></textarea>
+
                         </div>
                         <button type="submit" id="submit" class="btn btn-primary" ng-disabled="category.$invalid">Submit</button>
                         <p id="msgcat" style="display: none;">Category saved successfully</p>
@@ -84,7 +85,7 @@
                 }
                 else {
                     // window.location.href="/login";
-                    res.render('login.ejs',{message:'errorMessage'});
+                    res.render('Login.ejs',{message:'errorMessage'});
                     //res.render('login',{user: "Great User",title:"homepage"});
                 }
             });
@@ -104,7 +105,7 @@
                 }
                 else {
                     // window.location.href="/login";
-                    res.render('login.ejs',{message:'errorMessage'});
+                    res.render('Login.ejs',{message:'errorMessage'});
                     //res.render('login',{user: "Great User",title:"homepage"});
                 }
             });
@@ -122,7 +123,7 @@
                 }
                 else {
                     // window.location.href="/login";
-                    res.render('login.ejs',{message:'errorMessage'});
+                    res.render('Login.ejs',{message:'errorMessage'});
                     //res.render('login',{user: "Great User",title:"homepage"});
                 }
             });

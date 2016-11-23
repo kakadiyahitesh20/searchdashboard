@@ -3,14 +3,13 @@
  * Created by Hitesh on 21-10-2016.
  */
 
-var app = angular.module('myapp', ['ngRoute','UserValidation']);
+var app = angular.module('myapp', ['ngRoute','UserValidation','UserValidation1']);
 app.controller("HelloController", function($scope) {
-    $scope.helloTo = {};
-    $scope.helloTo.title = "World, AngularJS";
     //var path = $location.path();
 } );
 function registerController($scope) {
     $scope.password = '';
+    $scope.changepassword = '';
 }
 /*/!* Directives *!/
 angular.module('myapp.directives', [])
@@ -40,6 +39,20 @@ angular.module('UserValidation', []).directive('validPasswordC', function () {
         }
     }
 })
+
+
+angular.module('UserValidation1', []).directive('validPasswordC1', function () {
+    return {
+        require: 'ngModel',
+        link: function (scope, elm, attrs, ctrl) {
+            ctrl.$parsers.unshift(function (viewValue, $scope) {
+                var noMatch = viewValue != scope.changepass.changepassword.$viewValue
+                ctrl.$setValidity('noMatch', !noMatch)
+            })
+        }
+    }
+})
+
 // Start Controller
 /*app.config(function($routeProvider) {
     $routeProvider
@@ -53,12 +66,12 @@ angular.module('UserValidation', []).directive('validPasswordC', function () {
             //controller  : 'HomeController'
         })
         .when('/register', {
-            templateUrl : 'register.ejs'
+            templateUrl : 'Register.ejs'
             //controller  : 'BlogController'
         })
 
         .when('/login', {
-            templateUrl : 'login.ejs'
+            templateUrl : 'Login.ejs'
             //controller  : 'AboutController'
         })
 

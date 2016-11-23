@@ -9,3 +9,29 @@ i.glyphicon.glyphicon-calendar.fa.fa-calendar {
 #searchresult {
     margin-top: 30px;
 }
+#message {
+    width: 85%;
+    float: left;
+}
+div#messages {
+    margin-top: 12px;
+}
+#fname {
+    float: left;
+}
+.chat-room {
+    margin-top: 20px;
+}
+div#conversation {
+    margin-bottom: 15px;
+}
+.edit_info {
+    margin-top: 20px;
+    margin-left: 290px;
+}
+.editprofile .form-control, .changepass .form-control {
+    width: 50% !important;
+}
+.text-lowercase {
+    text-transform: none !important;
+}

@@ -68,7 +68,7 @@
         var name,dob,email,pass,org;
         $("#submit").click(function(){
             name = $("#name").val();
-            dob = $("#dob").val();
+            dob = $("#datepicker").val();
             email=$("#email").val();
             pass=$("#password").val();
             org = $("#org").val();
@@ -82,7 +82,7 @@
                 }
                 else {
                     // window.location.href="/login";
-                   // res.render('register.ejs',{message:'errorMessage'});
+                   // res.render('Register.ejs',{message:'errorMessage'});
                     //res.render('login',{user: "Great User",title:"homepage"});
                     window.location.href="/login";
                 }
