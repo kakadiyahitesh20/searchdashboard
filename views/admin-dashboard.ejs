@@ -17,7 +17,8 @@
                             <input type="text" class="form-control" id="inputcategory" required ng-model="catname" placeholder="Category" style="width: 50%;">
                             <label for="description" style="margin-top: 10px;">Description</label>
                             <textarea name="description" class="form-control" required ng-model="catdesc" id="description" style="width: 50%;height: 100px;"></textarea>
-
+                            <label>Website</label>
+                            <input type="text" class="form-control" id="inputwebsite" required ng-model="websitename" placeholder="Website" style="width: 50%;">
                         </div>
                         <button type="submit" id="submit" class="btn btn-primary" ng-disabled="category.$invalid">Submit</button>
                         <p id="msgcat" style="display: none;">Category saved successfully</p>
@@ -39,6 +40,8 @@
                             <% } %>
                           </select>
                         </div>
+                        <label>Website</label>
+                        <input type="text" class="form-control" id="inputsubwebsite" required ng-model="websitesubname" placeholder="Website" style="width: 50%;">
                         <button type="submit" id="subcategory" class="btn btn-primary" ng-disabled="subcategory.$invalid">Submit</button>
                         <p id="msgsub" style="display: none;">Sub Category saved successfully</p>
                     </form>
@@ -70,14 +73,15 @@
 </html>
 <script>
     $(document).ready(function(){
-        var category,description;
+        var category,description,website;
         $("#submit").click(function(){
             category=$("#inputcategory").val();
             description=$("#description").val();
+            website=$("#inputwebsite").val();
             /*
              * Perform some validation here.
              */
-            $.post("/addCategory",{category:category,description:description},function(data){
+            $.post("/addCategory",{category:category,description:description,website:website},function(data){
                 if(data==='done')
                 {
                     window.location.href="/admin-dashboard";
@@ -94,10 +98,11 @@
            var subcategory=$("#inputsubcategory").val();
            var subdescription=$("#subdescription").val();
             var categoryid = $("#categoryid").val();
+            var subwebsite=$("#inputsubwebsite").val();
             /*
              * Perform some validation here.
              */
-            $.post("/addSubCategory",{subcategory:subcategory,subdescription:subdescription,categoryid:categoryid},function(data){
+            $.post("/addSubCategory",{subcategory:subcategory,subdescription:subdescription,categoryid:categoryid,subwebsite:subwebsite},function(data){
                 if(data==='done')
                 {
                     window.location.href="/admin-dashboard";

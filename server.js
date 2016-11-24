@@ -1,13 +1,12 @@
-var express		=	require('express');
-var session		=	require('express-session');
-var bodyParser  	= 	require('body-parser');
+var express	=	require('express');
+var session	=	require('express-session');
+var bodyParser  = 	require('body-parser');
 var passport = require('passport');
 var crypto = require('crypto');
 var async = require('async');
-var app			=	express();
+var app	= express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
-/*hash = require('./pass').hash;*/
 var LocalStrategy   = require('passport-local').Strategy;
 app.use(bodyParser.urlencoded({ extended: false }));
 var router = express.Router();
@@ -16,10 +15,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(passport.initialize());
 app.use(passport.session());
-    app.use("/",router);
-    app.use(express.static('views'));
-    app.set('view engine', 'ejs');
-//app.engine('.html', require('ejs').__express);
+app.use("/",router);
+app.use(express.static('views'));
+app.set('view engine', 'ejs');
 var path = __dirname + '/views/';
 // usernames which are currently connected to the chat
 var connection = require('./app/config');
@@ -52,20 +50,6 @@ io.sockets.on('connection', function (socket) {
     socket.on('sendchat', function (data) {
         // we tell the client to execute 'updatechat' with 2 parameters
         io.sockets.in(socket.room).emit('updatechat', socket.username, data);
-    });
-
-    socket.on('switchRoom', function(newroom){
-        // leave the current room (stored in session)
-        socket.leave(socket.room);
-        // join new room, received as function parameter
-        socket.join(newroom);
-        socket.emit('updatechat', 'SERVER', 'you have connected to '+ newroom);
-        // sent message to OLD room
-        socket.broadcast.to(socket.room).emit('updatechat', 'SERVER', socket.username+' has left this room');
-        // update socket session room title
-        socket.room = newroom;
-        socket.broadcast.to(newroom).emit('updatechat', 'SERVER', socket.username+' has joined this room');
-        socket.emit('updaterooms', rooms, newroom);
     });
 
     // when the user disconnects.. perform this
@@ -315,7 +299,7 @@ app.post('/login',function(req,res){
 });
 
 app.post('/addCategory',function(req,res){
-    var queryString = "insert into category(name,description) values('" + req.body.category + "','" + req.body.description + "')";
+    var queryString = "insert into category(name,description,website) values('" + req.body.category + "','" + req.body.description + "','" + req.body.website + "')";
     console.log(queryString);
     connection.query(queryString, function (error, results) {
         if (error) {
@@ -330,7 +314,7 @@ app.post('/addCategory',function(req,res){
     });
 });
 app.post('/addSubCategory',function(req,res){
-    var queryString = "insert into subcategory(category_id,name,description) values('" + req.body.categoryid + "','" + req.body.subcategory + "','" + req.body.subdescription + "')";
+    var queryString = "insert into subcategory(category_id,name,description,website) values('" + req.body.categoryid + "','" + req.body.subcategory + "','" + req.body.subdescription + "','" + req.body.subwebsite + "')";
     console.log(queryString);
     connection.query(queryString, function (error, results) {
         if (error) {
@@ -367,7 +351,7 @@ app.post('/removeCategory',function(req,res){
 });
 app.post('/searchResult',function(req,res){
     console.log(req.body.keyword);
-    var queryString = "SELECT * FROM category WHERE description LIKE '%" + req.body.keyword + "%'";
+    var queryString = "SELECT * FROM category inner JOIN subcategory ON category.id=subcategory.category_id WHERE category.description or subcategory.description Like '%" + req.body.keyword + "%'";
     console.log(queryString);
     connection.query(queryString, function (error, results) {
         if (error) {

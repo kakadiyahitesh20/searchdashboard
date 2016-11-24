@@ -83,11 +83,18 @@
                 data: data,
                 // the type of data we expect back
                 success: function (responseJson) {
+                   // alert(responseJson);
                     var obj = jQuery.parseJSON(responseJson);
-                    $('#searchresult').empty();
-                    $.each(obj, function(key,value) {
-                        $('#searchresult').append('<div class="col-md-12 list_result"><h4>'+value.name+'</h4><p>'+value.description+'</p></div>');
-                    });
+                    var objlength = obj.length;
+                    if( objlength > 0) {
+                        $('#searchresult').empty();
+                        $.each(obj, function (key, value) {
+                            $('#searchresult').append('<div class="col-md-12 list_result"><h4>' + value.name + '</h4><p>' + value.description + '</p><p><a href=' + value.website + '>' + value.website + '</a></p></div>');
+                        });
+                    } else {
+                        $('#searchresult').empty();
+                        $('#searchresult').append('<div class="col-md-12"><p>Sorry...No Keyword found..!! Search another keyword</p></div>');
+                    }
 
                 },
                 error: function (xhr, status) {
