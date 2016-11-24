@@ -352,7 +352,6 @@ app.post('/removeCategory',function(req,res){
 app.post('/searchResult',function(req,res){
     console.log(req.body.keyword);
     var queryString = "SELECT * FROM category inner JOIN subcategory ON category.id=subcategory.category_id WHERE category.description or subcategory.description Like '%" + req.body.keyword + "%'";
-    console.log(queryString);
     connection.query(queryString, function (error, results) {
         if (error) {
             throw error;
