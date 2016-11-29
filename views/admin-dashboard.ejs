@@ -98,11 +98,11 @@
            var subcategory=$("#inputsubcategory").val();
            var subdescription=$("#subdescription").val();
             var categoryid = $("#categoryid").val();
-            var subwebsite=$("#inputsubwebsite").val();
+            var subcatwebsite=$("#inputsubwebsite").val();
             /*
              * Perform some validation here.
              */
-            $.post("/addSubCategory",{subcategory:subcategory,subdescription:subdescription,categoryid:categoryid,subwebsite:subwebsite},function(data){
+            $.post("/addSubCategory",{subcategory:subcategory,subdescription:subdescription,categoryid:categoryid,subcatwebsite:subcatwebsite},function(data){
                 if(data==='done')
                 {
                     window.location.href="/admin-dashboard";
@@ -129,7 +129,6 @@
                 else {
                     // window.location.href="/login";
                     res.render('Login.ejs',{message:'errorMessage'});
-                    //res.render('login',{user: "Great User",title:"homepage"});
                 }
             });
         });
