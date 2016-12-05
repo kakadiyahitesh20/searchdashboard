@@ -163,6 +163,21 @@ module.exports = function(app) {
             }
         });
     });
+    app.post('/contacts', function (req, res) {
+        var queryString = "insert into contactus(name,email,message) values('" + req.body.name + "','" + req.body.email + "','" + req.body.message + "')";
+        console.log(queryString);
+        connection.query(queryString, function (error, results) {
+            if (error) {
+                        throw error;
+                    }
+                    else {
+                        //res.send('Inserted Successfully!');
+                        res.end('success');
+
+                        // res.write("Looked everywhere, but couldn't find that page at all!\n");
+                    }
+                });
+            });
     app.post('/removeuser', function (req, res) {
         var queryString = "DELETE FROM users WHERE id='" + req.body.id + "'";
         console.log(queryString);
