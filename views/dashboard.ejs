@@ -10,7 +10,7 @@
 <% include header_logged.ejs %>
         <!---->
 <div class="container-fluid">
-    <section class="container">
+    <div class="container">
         <div class="container-page">
             <div class="col-md-12">
                 <div class="panel with-nav-tabs panel-default">
@@ -69,11 +69,8 @@
                                     </div>
                                 </form>
                                 <div class="col-md-12" id="searchresult">
-
-
                                 </div>
                             </div>
-
                             <div class="tab-pane fade" id="tab2default">
                                 <script>
                                     (function() {
@@ -93,12 +90,8 @@
                     </div>
                 </div>
             </div>
-
         </div>
-
-
-
-    </section>
+    </div>
 </div>
 
 <% include footer %>
@@ -106,6 +99,7 @@
 </html>
 <script>
     $(document).ready(function(){
+        $(".panel").css("margin-top","70px")
         $("#submit").click(function(){
             var search = $("#search").val();
             /*
