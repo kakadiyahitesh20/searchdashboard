@@ -151,17 +151,15 @@ module.exports = function(app) {
     });
     app.post('/editinfo', function (req, res) {
         var created = new Date();
-        var queryString = "UPDATE users SET name='" + req.body.name + "',dob='" + req.body.dob + "',organization='" + req.body.org + "',created='" + created + "' WHERE email='" + req.body.email + "'";
+        var queryString = "update users set name='" + req.body.name + "',dob='" + req.body.dob + "',organization='" + req.body.org + "',created='" + created + "' WHERE email='" + req.body.email + "'";
         console.log(queryString);
         connection.query(queryString, function (error, results) {
             if (error) {
                 throw error;
             }
-            else {
-                //res.send('Inserted Successfully!');
+            else
+            {
                 res.end('success');
-
-                // res.write("Looked everywhere, but couldn't find that page at all!\n");
             }
         });
     });
