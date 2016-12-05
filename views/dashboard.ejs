@@ -106,7 +106,50 @@
                     console.log("The request is complete!");
                 }
             })
-        }
+        }/*
+        getGoogleSearchResult('text');
+        function getGoogleSearchResults(q) {
+
+            // Get the API key from Google's developer console
+            // Get the CSE ID from google.com/cse
+
+            var api = "https://www.googleapis.com/customsearch/v1?key="
+                + KEY + "&cx=" + CSE + "&q=" + encodeURIComponent(q);
+
+            try {
+
+                var response = UrlFetchApp.fetch(api, {
+                    muteHttpExceptions: true
+                });
+
+                if (response.getResponseCode() == 200) {
+
+                    var content = JSON.parse(response);
+
+                    // Did the search return any results?
+                    if (content.searchInformation.totalResults > 0) {
+
+                        var count = content.items.length;
+
+                        for (var i = 0; i < count; i++) {
+
+                            // Save the page title, description and hyperlink
+                            Logger.log(content.items[i].title);
+                            Logger.log(content.items[i].snippet);
+                            Logger.log(content.items[i].link);
+                        }
+                    }
+                }
+            } catch (f) {
+                Logger.log(f.toString());
+            }
+
+        }*/
+
+
+
+
+
     });
 </script>
 
