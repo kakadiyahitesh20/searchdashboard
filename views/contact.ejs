@@ -1,20 +1,13 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <% include head %>
 </head>
-<body>
-  <div>
-  <div>
-  <nav class="navbar navbar-inverse" role="navigation" style="padding-left:130px;">
-         <ul class="nav navbar-nav">
-        <li><a href="/">Home</a></li>
-        <li><a href="/about">About us</a></li>
-        <li class="active"><a href="/contact">Contact us<span class="sr-only">(current)</span></a></li>
-      </ul>
-</nav>
-</div>
-  <br/>
+<body  ng-app="myapp">
+<% include header %>
+<div class="container-fluid">
+    <section class="container">
+        <div class="container-page">
   <form class="form-horizontal" role="form" style="width: 50%;">
     <div class="form-group">
         <label for="name" class="col-sm-2 control-label">Name</label>
@@ -51,6 +44,9 @@
         </div>
     </div>
 </form>
-  </div>
+        </div>
+</section>
+</div>
+<% include footer %>
 </body>
 </html>
