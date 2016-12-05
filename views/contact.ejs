@@ -28,13 +28,7 @@
                     <div class="form-group">
                         <label for="message" class="col-sm-2 control-label">Message</label>
                         <div class="col-sm-10">
-                            <textarea class="form-control" rows="4" name="message"></textarea>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="human" class="col-sm-2 control-label">2 + 3 = ?</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="human" name="human" placeholder="Your Answer">
+                            <textarea class="form-control" rows="4" name="message" id="smessage"></textarea>
                         </div>
                     </div>
                     <div class="form-group">
@@ -61,12 +55,12 @@
         $("#submit").click(function(){
             name = $("#name").val();
             email=$("#email").val();
-            message=$("#message").val();
+            message=$("#smessage").val();
 
             /*
              * Perform some validation here.
              */
-            $.post("contacts",{name:name,email:email,message:message},function(data){
+            $.post("/contacts",{name:name,email:email,message:message},function(data){
                 if(data==='done')
                 {
                     window.location.href="/home";

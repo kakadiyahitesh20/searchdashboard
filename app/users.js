@@ -165,8 +165,8 @@ module.exports = function(app) {
             }
         });
     });
-    app.post('/contact', function (req, res) {
-        var queryString = "insert into users(name,email,message) values('" + req.body.name + "','" + req.body.email + "','" + req.body.message + "','" + created + "')";
+    app.post('/contacts', function (req, res) {
+        var queryString = "insert into contactus(name,email,message) values('" + req.body.name + "','" + req.body.email + "','" + req.body.message + "')";
         console.log(queryString);
         connection.query(queryString, function (error, results) {
             if (error) {
@@ -179,9 +179,7 @@ module.exports = function(app) {
                         // res.write("Looked everywhere, but couldn't find that page at all!\n");
                     }
                 });
-            }
-        });
-    });
+            });
     app.post('/removeuser', function (req, res) {
         var queryString = "DELETE FROM users WHERE id='" + req.body.id + "'";
         console.log(queryString);
