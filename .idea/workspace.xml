@@ -6,11 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="5c7809c5-db61-4fb2-8471-6f605bba1eb3" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-<<<<<<< HEAD
-=======
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/css/custom.css" afterPath="$PROJECT_DIR$/views/css/custom.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/dashboard.ejs" afterPath="$PROJECT_DIR$/views/dashboard.ejs" />
->>>>>>> f33d84b29b7b9f839af29969aecdb2455571c8e3
     </list>
     <ignored path="search_dashborad.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -36,13 +33,10 @@
       <file leaf-file-name="routes.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/routes.js">
           <provider selected="true" editor-type-id="text-editor">
-<<<<<<< HEAD
             <state relative-caret-position="17">
               <caret line="1" column="29" lean-forward="false" selection-start-line="1" selection-start-column="26" selection-end-line="1" selection-end-column="29" />
-=======
             <state relative-caret-position="360">
               <caret line="54" column="24" selection-start-line="54" selection-start-column="24" selection-end-line="54" selection-end-column="24" />
->>>>>>> f33d84b29b7b9f839af29969aecdb2455571c8e3
               <folding>
                 <element signature="e#342#1609#0" expanded="false" />
                 <element signature="e#2171#2376#0" expanded="false" />
@@ -61,7 +55,6 @@
           </provider>
         </entry>
       </file>
-<<<<<<< HEAD
       <file leaf-file-name="UserList.ejs" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views/UserList.ejs">
           <provider selected="true" editor-type-id="text-editor">
@@ -88,7 +81,6 @@
             <state relative-caret-position="1700">
               <caret line="100" column="55" lean-forward="false" selection-start-line="100" selection-start-column="55" selection-end-line="100" selection-end-column="55" />
               <folding />
-=======
       <file leaf-file-name="dashboard.ejs" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views/dashboard.ejs">
           <provider selected="true" editor-type-id="text-editor">
@@ -98,7 +90,6 @@
                 <element signature="n#style#0;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <marker date="1480970815947" expanded="false" signature="422:743" ph="..." />
               </folding>
->>>>>>> f33d84b29b7b9f839af29969aecdb2455571c8e3
             </state>
           </provider>
         </entry>
@@ -106,17 +97,14 @@
       <file leaf-file-name="contact.ejs" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views/contact.ejs">
           <provider selected="true" editor-type-id="text-editor">
-<<<<<<< HEAD
             <state relative-caret-position="17">
               <caret line="1" column="14" lean-forward="false" selection-start-line="1" selection-start-column="4" selection-end-line="1" selection-end-column="14" />
               <folding />
-=======
             <state relative-caret-position="0">
               <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding>
                 <marker date="1480958272625" expanded="true" signature="2446:2509" ph="/*...*/" />
               </folding>
->>>>>>> f33d84b29b7b9f839af29969aecdb2455571c8e3
             </state>
           </provider>
         </entry>
@@ -124,13 +112,10 @@
       <file leaf-file-name="admin-live-chat.ejs" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views/admin-live-chat.ejs">
           <provider selected="true" editor-type-id="text-editor">
-<<<<<<< HEAD
             <state relative-caret-position="1377">
               <caret line="81" column="17" lean-forward="false" selection-start-line="81" selection-start-column="17" selection-end-line="81" selection-end-column="17" />
-=======
             <state relative-caret-position="104">
               <caret line="72" column="31" selection-start-line="72" selection-start-column="31" selection-end-line="72" selection-end-column="31" />
->>>>>>> f33d84b29b7b9f839af29969aecdb2455571c8e3
               <folding />
             </state>
           </provider>
@@ -139,13 +124,10 @@
       <file leaf-file-name="server.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/server.js">
           <provider selected="true" editor-type-id="text-editor">
-<<<<<<< HEAD
             <state relative-caret-position="328">
               <caret line="24" column="31" lean-forward="false" selection-start-line="24" selection-start-column="26" selection-end-line="24" selection-end-column="31" />
-=======
             <state relative-caret-position="357">
               <caret line="21" column="54" selection-start-line="21" selection-start-column="54" selection-end-line="21" selection-end-column="54" />
->>>>>>> f33d84b29b7b9f839af29969aecdb2455571c8e3
               <folding>
                 <element signature="e#1078#2642#0" expanded="false" />
               </folding>
@@ -156,13 +138,10 @@
       <file leaf-file-name="users.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/users.js">
           <provider selected="true" editor-type-id="text-editor">
-<<<<<<< HEAD
             <state relative-caret-position="136">
               <caret line="65" column="7" lean-forward="false" selection-start-line="65" selection-start-column="7" selection-end-line="65" selection-end-column="7" />
-=======
             <state relative-caret-position="646">
               <caret line="176" column="13" selection-start-line="176" selection-start-column="13" selection-end-line="176" selection-end-column="13" />
->>>>>>> f33d84b29b7b9f839af29969aecdb2455571c8e3
               <folding>
                 <element signature="e#0#43#0" expanded="false" />
                 <element signature="e#196#1004#0" expanded="false" />
@@ -556,24 +535,18 @@
       <workItem from="1480069654704" duration="2852000" />
       <workItem from="1480251357555" duration="1647000" />
       <workItem from="1480350184144" duration="825000" />
-<<<<<<< HEAD
       <workItem from="1480417717715" duration="11808000" />
       <workItem from="1480532005987" duration="85000" />
       <workItem from="1481027413534" duration="643000" />
-=======
       <workItem from="1480417717715" duration="11306000" />
       <workItem from="1480444976920" duration="3769000" />
       <workItem from="1480946774152" duration="10662000" />
->>>>>>> f33d84b29b7b9f839af29969aecdb2455571c8e3
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-<<<<<<< HEAD
     <option name="totallyTimeSpent" value="225908000" />
-=======
     <option name="totallyTimeSpent" value="239109000" />
->>>>>>> f33d84b29b7b9f839af29969aecdb2455571c8e3
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -592,12 +565,9 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289689" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.28477904" sideWeight="0.50298506" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25373134" sideWeight="0.50800914" order="2" side_tool="true" content_ui="tabs" />
-<<<<<<< HEAD
       <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29459903" sideWeight="0.49701494" order="2" side_tool="false" content_ui="tabs" />
-=======
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289689" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6661211" sideWeight="0.49701494" order="2" side_tool="false" content_ui="tabs" />
->>>>>>> f33d84b29b7b9f839af29969aecdb2455571c8e3
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289689" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
@@ -809,51 +779,39 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/views/app/app.js">
       <provider selected="true" editor-type-id="text-editor">
-<<<<<<< HEAD
         <state relative-caret-position="629">
           <caret line="37" column="0" lean-forward="false" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
-=======
         <state relative-caret-position="102">
           <caret line="6" column="52" selection-start-line="6" selection-start-column="52" selection-end-line="6" selection-end-column="52" />
->>>>>>> f33d84b29b7b9f839af29969aecdb2455571c8e3
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/views/UserList.ejs">
       <provider selected="true" editor-type-id="text-editor">
-<<<<<<< HEAD
         <state relative-caret-position="782">
           <caret line="46" column="44" lean-forward="false" selection-start-line="46" selection-start-column="44" selection-end-line="46" selection-end-column="44" />
-=======
         <state relative-caret-position="204">
           <caret line="12" column="37" selection-start-line="12" selection-start-column="37" selection-end-line="12" selection-end-column="37" />
->>>>>>> f33d84b29b7b9f839af29969aecdb2455571c8e3
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/views/admin-dashboard.ejs">
       <provider selected="true" editor-type-id="text-editor">
-<<<<<<< HEAD
         <state relative-caret-position="493">
           <caret line="29" column="87" lean-forward="false" selection-start-line="29" selection-start-column="87" selection-end-line="29" selection-end-column="87" />
-=======
         <state relative-caret-position="1700">
           <caret line="100" column="55" selection-start-line="100" selection-start-column="55" selection-end-line="100" selection-end-column="55" />
           <folding />
->>>>>>> f33d84b29b7b9f839af29969aecdb2455571c8e3
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/views/login.ejs">
       <provider selected="true" editor-type-id="text-editor">
-<<<<<<< HEAD
         <state relative-caret-position="408">
           <caret line="24" column="31" lean-forward="false" selection-start-line="24" selection-start-column="31" selection-end-line="24" selection-end-column="31" />
-=======
         <state relative-caret-position="799">
           <caret line="47" column="30" selection-start-line="47" selection-start-column="25" selection-end-line="47" selection-end-column="30" />
           <folding />
->>>>>>> f33d84b29b7b9f839af29969aecdb2455571c8e3
         </state>
       </provider>
     </entry>
@@ -867,13 +825,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/config.js">
       <provider selected="true" editor-type-id="text-editor">
-<<<<<<< HEAD
         <state relative-caret-position="1377">
           <caret line="81" column="17" lean-forward="false" selection-start-line="81" selection-start-column="17" selection-end-line="81" selection-end-column="17" />
-=======
         <state relative-caret-position="102">
           <caret line="6" column="24" selection-start-line="6" selection-start-column="16" selection-end-line="6" selection-end-column="24" />
->>>>>>> f33d84b29b7b9f839af29969aecdb2455571c8e3
           <folding />
         </state>
       </provider>
@@ -886,7 +841,6 @@
         </state>
       </provider>
     </entry>
-<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/views/UserList.ejs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
@@ -915,7 +869,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
           <caret line="1" column="14" lean-forward="false" selection-start-line="1" selection-start-column="4" selection-end-line="1" selection-end-column="14" />
-=======
     <entry file="file://$PROJECT_DIR$/views/Profile.ejs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
@@ -930,20 +883,16 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="237">
           <caret line="37" column="8" selection-start-line="37" selection-start-column="8" selection-end-line="37" selection-end-column="8" />
->>>>>>> f33d84b29b7b9f839af29969aecdb2455571c8e3
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/server.js">
       <provider selected="true" editor-type-id="text-editor">
-<<<<<<< HEAD
         <state relative-caret-position="17">
           <caret line="1" column="29" lean-forward="false" selection-start-line="1" selection-start-column="26" selection-end-line="1" selection-end-column="29" />
-=======
         <state relative-caret-position="357">
           <caret line="21" column="54" selection-start-line="21" selection-start-column="54" selection-end-line="21" selection-end-column="54" />
->>>>>>> f33d84b29b7b9f839af29969aecdb2455571c8e3
           <folding>
             <element signature="e#1078#2642#0" expanded="false" />
           </folding>
@@ -952,13 +901,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/users.js">
       <provider selected="true" editor-type-id="text-editor">
-<<<<<<< HEAD
         <state relative-caret-position="136">
           <caret line="65" column="7" lean-forward="false" selection-start-line="65" selection-start-column="7" selection-end-line="65" selection-end-column="7" />
-=======
         <state relative-caret-position="646">
           <caret line="176" column="13" selection-start-line="176" selection-start-column="13" selection-end-line="176" selection-end-column="13" />
->>>>>>> f33d84b29b7b9f839af29969aecdb2455571c8e3
           <folding>
             <element signature="e#0#43#0" expanded="false" />
             <element signature="e#196#1004#0" expanded="false" />
@@ -974,7 +920,6 @@
         </state>
       </provider>
     </entry>
-<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/views/app/app.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
@@ -990,7 +935,6 @@
           <folding>
             <element signature="e#1078#2642#0" expanded="false" />
           </folding>
-=======
     <entry file="file://$PROJECT_DIR$/views/contact.ejs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1046,7 +990,6 @@
         <state relative-caret-position="506">
           <caret line="39" column="4" selection-start-line="39" selection-start-column="4" selection-end-line="39" selection-end-column="4" />
           <folding />
->>>>>>> f33d84b29b7b9f839af29969aecdb2455571c8e3
         </state>
       </provider>
     </entry>
