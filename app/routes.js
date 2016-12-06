@@ -230,8 +230,23 @@ module.exports = function(app) {
         else {
             res.redirect('/login');
         }
+    });
+    app.get('/Customer_Query', function (req, res) {
+        sess = req.session;
+        if (sess.email) {
+            connection.query("select * from  contactus", function (err, rows) {
+                connection.query("select * from  users where email = '" + sess.email + "'", function (err, rows1) {
+                    res.render('Customer_Query', {querylist: rows,usersinfo : rows1});
+                });
 
+            });
 
+            //res.render('index', {data : testimonials});
+            //res.redirect('dashboard');
+        }
+        else {
+            res.redirect('/login');
+        }
     });
     app.get('/ChangePassword', function (req, res) {
         sess = req.session;
