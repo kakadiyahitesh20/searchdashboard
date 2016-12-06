@@ -46,7 +46,15 @@ module.exports = function(app) {
             res.render('register', {user: "Great User", title: "homepage"});
         }
     });
-
+    app.get('/contact', function (req, res) {
+        sess = req.session;
+        if (sess.email) {
+            res.redirect('/dashboard');
+        }
+        else {
+            res.render('contact', {title: "Contact"});
+        }
+    });
     app.get('/logout', function (req, res) {
 
         req.session.destroy(function (err) {

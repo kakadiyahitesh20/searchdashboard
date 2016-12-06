@@ -4,60 +4,94 @@
     <% include head %>
 </head>
 <body  ng-app="myapp">
+
+
+
 <% include header_logged.ejs %>
+        <!---->
 <div class="container-fluid">
-    <section class="container">
+    <div class="container">
         <div class="container-page">
-            <form name="searchdata">
             <div class="col-md-12">
-                <div class="form-group" style="margin-top: 20px">
-                    <div class="col-md-2">
-                    <label for="search">Search Keyword :</label>
+                <div class="panel with-nav-tabs panel-default">
+                    <div class="panel-heading">
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a href="#tab1default" data-toggle="tab">Local Search</a></li>
+                            <li><a href="#tab2default" data-toggle="tab">Google Custom Search</a></li>
+
+                        </ul>
+                    </div>
+                    <div class="panel-body">
+                        <div class="tab-content">
+                            <div class="tab-pane fade in active" id="tab1default">
+                                <form name="searchdata">
+                                    <div class="col-md-12">
+                                        <div class="form-group" style="margin-top: 20px">
+                                            <div class="col-md-2">
+                                                <label for="search">Search Keyword :</label>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <input type="text" class="form-control" id="search" required ng-model="search">
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="col-lg-2">
+                                            <label for="search">Choose Category :</label>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <% for(var i=0; i<categorylist.length; i++) {%>
+                                                <div class="checkbox">
+                                                    <label>
+                                                        <input id="<%= categorylist[i].id %>" type="checkbox"><%= categorylist[i].name %></input>
+                                                    </label>
+                                                </div>
+                                                <ul>
+                                                    <% for(var j=0; j<subcategorylist.length; j++) {%>
+                                                    <% if(categorylist[i].id == subcategorylist[j].category_id) {%>
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            <input id="<%= subcategorylist[j].id %>" type="checkbox"><%= subcategorylist[j].name %>
+                                                        </label>
+                                                    </div>
+                                                    <% } %>
+                                                    <% } %>
+                                                </ul>
+                                                <% } %>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="col-md-2"></div>
+                                        <div class="col-md-4"><button type="submit" id="submit" class="btn btn-primary" ng-disabled="searchdata.$invalid">Submit</button></div>
+                                    </div>
+                                </form>
+                                <div class="col-md-12" id="searchresult">
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="tab2default">
+                                <script>
+                                    (function() {
+                                        var cx = '001402949329970774887:nzulo_jzyrw';
+                                        var gcse = document.createElement('script');
+                                        gcse.type = 'text/javascript';
+                                        gcse.async = true;
+                                        gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+                                        var s = document.getElementsByTagName('script')[0];
+                                        s.parentNode.insertBefore(gcse, s);
+                                    })();
+                                </script>
+                                <gcse:search></gcse:search>
+                            </div>
+
                         </div>
-                    <div class="col-md-4">
-                        <input type="text" class="form-control" id="search" required ng-model="search">
                     </div>
-
                 </div>
             </div>
-            <div class="col-md-12">
-                <div class="col-lg-2">
-                    <label for="search">Choose Category :</label>
-                </div>
-                <div class="col-md-4">
-                <div class="form-group">
-                <% for(var i=0; i<categorylist.length; i++) {%>
-                    <div class="checkbox">
-                        <label>
-                        <input id="<%= categorylist[i].id %>" type="checkbox"><%= categorylist[i].name %></input>
-                        </label>
-                    </div>
-                <ul>
-                    <% for(var j=0; j<subcategorylist.length; j++) {%>
-                    <% if(categorylist[i].id == subcategorylist[j].category_id) {%>
-                    <div class="checkbox">
-                    <label>
-                    <input id="<%= subcategorylist[j].id %>" type="checkbox"><%= subcategorylist[j].name %>
-                    </label>
-                    </div>
-                    <% } %>
-                    <% } %>
-                </ul>
-                <% } %>
-                </div>
-                </div>
-            </div>
-                <div class="col-md-12">
-                    <div class="col-md-2"></div>
-                    <div class="col-md-4"><button type="submit" id="submit" class="btn btn-primary" ng-disabled="searchdata.$invalid">Submit</button></div>
-                </div>
-                </form>
         </div>
-
-        <div class="col-md-12" id="searchresult">
-
-        </div>
-    </section>
+    </div>
 </div>
 
 <% include footer %>
@@ -65,6 +99,7 @@
 </html>
 <script>
     $(document).ready(function(){
+        $(".panel").css("margin-top","70px")
         $("#submit").click(function(){
             var search = $("#search").val();
             /*
@@ -106,7 +141,12 @@
                     console.log("The request is complete!");
                 }
             })
-        }/*
+        }
+
+
+
+
+        /*
         getGoogleSearchResult('text');
         function getGoogleSearchResults(q) {
 
@@ -152,4 +192,3 @@
 
     });
 </script>
-
