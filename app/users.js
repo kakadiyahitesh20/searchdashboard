@@ -48,7 +48,23 @@ module.exports = function(app) {
             }
         });
     });
+    app.post('/fpassword', function (req, res) {
 
+        connection.query("select * from users where email = '" + req.body.email + "'", function (err, rows) {
+            numRows = rows.length;
+            if (err)
+                return done(err);
+            if (numRows == 0) {
+                // return done(null, false, req.flash('signupMessage', 'That email is already taken.'));
+                res.end('Please enter correct credentials.');
+            }
+            else {
+                sess = req.session;
+                sess.email = req.body.email;
+                res.end('done');
+            }
+        });
+    });
     app.post('/addCategory', function (req, res) {
         var queryString = "insert into category(name,description,website) values('" + req.body.category + "','" + req.body.description + "','" + req.body.website + "')";
         console.log(queryString);
