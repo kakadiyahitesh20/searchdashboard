@@ -59,8 +59,6 @@ module.exports = function(app) {
                 res.end('Please enter correct credentials.');
             }
             else {
-                sess = req.session;
-                sess.email = req.body.email;
                 res.end('done');
             }
         });
