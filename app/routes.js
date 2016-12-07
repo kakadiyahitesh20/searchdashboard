@@ -46,6 +46,15 @@ module.exports = function(app) {
             res.render('register', {user: "Great User", title: "homepage"});
         }
     });
+    app.get('/forgot_password', function (req, res) {
+        sess = req.session;
+        if (sess.email) {
+            res.redirect('/dashboard');
+        }
+        else {
+            res.render('forgot_password', {user: "Great User", title: "forgot password"});
+        }
+    });
     app.get('/contact', function (req, res) {
         sess = req.session;
         if (sess.email) {
