@@ -64,6 +64,6 @@ io.sockets.on('connection', function (socket) {
     });
 });
 
-http.listen(3000,'localhost',function(){
+http.listen(80,'13.84.42.35',function(){
   console.log("Live at Port 3000");
 });
