@@ -63,7 +63,9 @@ io.sockets.on('connection', function (socket) {
         socket.leave(socket.room);
     });
 });
-
+var port = process.env.PORT || 1337;
+http.listen(port);
+/*
 http.listen(80,'13.84.42.35',function(){
   console.log("Live at Port 3000");
-});
+});*/
