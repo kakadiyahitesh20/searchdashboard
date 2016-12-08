@@ -124,7 +124,7 @@
                     if( objlength > 0) {
                         $('#searchresult').empty();
                         $.each(obj, function (key, value) {
-                            $('#searchresult').append('<div class="col-md-12 list_result"><h4>' + value.name + '</h4><p>' + value.description + '</p><p><a href=' + value.website + '>' + value.website + '</a></p></div>');
+                            $('#searchresult').append('<div class="col-md-12 list_result"><h4>' + value.name + '</h4><p>' + value.description + '</p><p><a target="_blank" href=' + value.website + '>' + value.website + '</a></p></div>');
                         });
                     } else {
                         $('#searchresult').empty();

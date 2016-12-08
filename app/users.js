@@ -55,7 +55,7 @@ module.exports = function(app) {
             if (err)
                 return done(err);
             if (numRows == 0) {
-                res.end('Please enter correct credentials.');
+                res.end('email does not exist');
             }
             else {
                 res.end('done');
