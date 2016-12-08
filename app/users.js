@@ -55,7 +55,6 @@ module.exports = function(app) {
             if (err)
                 return done(err);
             if (numRows == 0) {
-                // return done(null, false, req.flash('signupMessage', 'That email is already taken.'));
                 res.end('Please enter correct credentials.');
             }
             else {
@@ -94,19 +93,6 @@ module.exports = function(app) {
         });
     });
     app.post('/removeCategory', function (req, res) {
-        /* var queryString = "DELETE FROM category WHERE id=" +req.body.categoryid;
-         console.log(queryString);
-         connection.query(queryString, function (error, results) {
-         if (error) {
-         throw error;
-         }
-         else {
-         //res.send('Inserted Successfully!');
-         res.end('done');
-
-         // res.write("Looked everywhere, but couldn't find that page at all!\n");
-         }
-         });*/
         connection.query("DELETE FROM category WHERE id= '" + req.body.categoryid + "'", function (err, result2) {
             connection.query("DELETE FROM subcategory WHERE category_id='" + req.body.categoryid + "'", function (err, result3) {
                 console.log(result3);
@@ -185,10 +171,7 @@ module.exports = function(app) {
                         throw error;
                     }
                     else {
-                        //res.send('Inserted Successfully!');
                         res.end('success');
-
-                        // res.write("Looked everywhere, but couldn't find that page at all!\n");
                     }
                 });
             });

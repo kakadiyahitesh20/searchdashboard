@@ -109,26 +109,23 @@
                     $("#msgsub").show();
                 }
                 else {
-                    // window.location.href="/login";
-                    res.render('Login.ejs',{message:'errorMessage'});
-                    //res.render('login',{user: "Great User",title:"homepage"});
+                    alert("Unable to delete. Some error occured!!");
                 }
             });
         });
         $("#removecategory").click(function(){
-            var categoryid = $("#categoryid").val();
+            var category_id = $("#categoryid").val();
             /*
              * Perform some validation here.
              */
-            $.post("/removeCategory",{categoryid:categoryid},function(data){
+            $.post("/removeCategory",{categoryid:category_id},function(data){
                 if(data==='done')
                 {
                     window.location.href="/admin-dashboard";
                     $("#removecat").show();
                 }
                 else {
-                    // window.location.href="/login";
-                    res.render('Login.ejs',{message:'errorMessage'});
+                    alert("Unable to delete. Some error occured!!");
                 }
             });
         });
