@@ -109,9 +109,7 @@
                     $("#msgsub").show();
                 }
                 else {
-                    // window.location.href="/login";
-                    res.render('Login.ejs',{message:'errorMessage'});
-                    //res.render('login',{user: "Great User",title:"homepage"});
+                    alert("Unable to delete. Some error occured!!");
                 }
             });
         });
@@ -127,8 +125,7 @@
                     $("#removecat").show();
                 }
                 else {
-                    // window.location.href="/login";
-                    res.render('Login.ejs',{message:'errorMessage'});
+                    alert("Unable to delete. Some error occured!!");
                 }
             });
         });
