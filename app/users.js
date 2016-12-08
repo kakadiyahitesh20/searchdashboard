@@ -172,10 +172,7 @@ module.exports = function(app) {
                         throw error;
                     }
                     else {
-                        //res.send('Inserted Successfully!');
                         res.end('success');
-
-                        // res.write("Looked everywhere, but couldn't find that page at all!\n");
                     }
                 });
             });
