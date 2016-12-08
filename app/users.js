@@ -55,7 +55,6 @@ module.exports = function(app) {
             if (err)
                 return done(err);
             if (numRows == 0) {
-                // return done(null, false, req.flash('signupMessage', 'That email is already taken.'));
                 res.end('Please enter correct credentials.');
             }
             else {
