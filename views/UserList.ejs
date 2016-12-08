@@ -33,7 +33,7 @@
                  <td><%= userlist[i].created %></td>
                  <td>
                      <% if(userlist[i].name != 'admin') { %>
-                        <a href="#" class="table-link danger" id="<%= userlist[i].id %>">
+                        <a href="#" class="removeuser danger" id="<%= userlist[i].id %>">
                                 <span class="fa-stack">
                                     <i class="fa fa-square fa-stack-2x"></i> <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
                                 </span>
@@ -55,7 +55,7 @@
 <script>
     $(document).ready(function(){
         var id;
-        $(".table-link").click(function(){
+        $(".removeuser").click(function(){
             id = $(this).attr('id');
             if (confirm('Are you sure want to delete it?')) {
                 $.post("/removeuser",{id:id},function(data){
@@ -64,10 +64,7 @@
                         window.location.href="/UserList";
                     }
                     else {
-                        // window.location.href="/login";
-                        // res.render('Register.ejs',{message:'errorMessage'});
-                        //res.render('login',{user: "Great User",title:"homepage"});
-                        window.location.href="/login";
+                        alert("Unable to delete. Some error occured!!");
                     }
                 });
             } else {
