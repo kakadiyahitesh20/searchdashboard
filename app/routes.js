@@ -246,9 +246,6 @@ module.exports = function(app) {
                 });
 
             });
-
-            //res.render('index', {data : testimonials});
-            //res.redirect('dashboard');
         }
         else {
             res.redirect('/login');
