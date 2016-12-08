@@ -116,11 +116,11 @@
             });
         });
         $("#removecategory").click(function(){
-            var categoryid = $("#categoryid").val();
+            var category_id = $("#categoryid").val();
             /*
              * Perform some validation here.
              */
-            $.post("/removeCategory",{categoryid:categoryid},function(data){
+            $.post("/removeCategory",{categoryid:category_id},function(data){
                 if(data==='done')
                 {
                     window.location.href="/admin-dashboard";
