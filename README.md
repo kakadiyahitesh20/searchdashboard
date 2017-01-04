@@ -18,7 +18,7 @@ Its is a small search engine that can be used for small organisation or firm to 
 <li>Create and edit Profile</li>
 <li>Live chat</li>
 <li>Search Keyword in local database</li>
-<li>Search keyword in local google</li>
+<li>Search keyword in Google</li>
 <li>Customer Queries to admin</li>
 <li>Add category and sub category by admin</li>
 <li>Remove category by admin</li>
