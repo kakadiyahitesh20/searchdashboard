@@ -2,7 +2,6 @@ var express	=	require('express');
 var session	=	require('express-session');
 var bodyParser  = 	require('body-parser');
 var passport = require('passport');
-
 var async = require('async');
 var app	= express();
 var http = require('http').Server(app);

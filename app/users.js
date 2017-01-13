@@ -70,10 +70,7 @@ module.exports = function(app) {
                 throw error;
             }
             else {
-                //res.send('Inserted Successfully!');
                 res.end('done');
-
-                // res.write("Looked everywhere, but couldn't find that page at all!\n");
             }
         });
     });
@@ -85,10 +82,7 @@ module.exports = function(app) {
                 throw error;
             }
             else {
-                //res.send('Inserted Successfully!');
                 res.end('done');
-
-                // res.write("Looked everywhere, but couldn't find that page at all!\n");
             }
         });
     });
@@ -108,12 +102,8 @@ module.exports = function(app) {
                 throw error;
             }
             else {
-                //res.send('Inserted Successfully!');
                 res.type('text/plain');
                 res.json(results);
-                // res.end('done');
-
-                // res.write("Looked everywhere, but couldn't find that page at all!\n");
             }
         });
     });
@@ -123,11 +113,9 @@ module.exports = function(app) {
             console.log(rows);
             // console.log("above row object");
             numRows = rows.length;
-            console.log(numRows);
             if (err)
                 return done(err);
             if (numRows == '1') {
-                // return done(null, false, req.flash('signupMessage', 'That email is already taken.'));
                 res.end('done');
             }
             else {
@@ -140,10 +128,7 @@ module.exports = function(app) {
                         throw error;
                     }
                     else {
-                        //res.send('Inserted Successfully!');
                         res.end('success');
-
-                        // res.write("Looked everywhere, but couldn't find that page at all!\n");
                     }
                 });
             }
@@ -152,7 +137,6 @@ module.exports = function(app) {
     app.post('/editinfo', function (req, res) {
         var created = new Date();
         var queryString = "update users set name='" + req.body.name + "',dob='" + req.body.dob + "',organization='" + req.body.org + "',created='" + created + "' WHERE email='" + req.body.email + "'";
-        console.log(queryString);
         connection.query(queryString, function (error, results) {
             if (error) {
                 throw error;
@@ -183,10 +167,7 @@ module.exports = function(app) {
                 throw error;
             }
             else {
-                //res.send('Inserted Successfully!');
                 res.end('success');
-
-                // res.write("Looked everywhere, but couldn't find that page at all!\n");
             }
         });
     });
@@ -199,12 +180,8 @@ module.exports = function(app) {
                 throw error;
             }
             else {
-                //res.send('Inserted Successfully!');
                 res.type('text/plain');
                 res.json(results);
-                // res.end('done');
-
-                // res.write("Looked everywhere, but couldn't find that page at all!\n");
             }
         });
     });

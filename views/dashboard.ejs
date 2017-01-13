@@ -110,7 +110,7 @@
         function getAndRenderData(search) {
             var data = JSON.stringify({ keyword: search });
             $.ajax({
-                url: "http://searchdashboard.azurewebsites.net/searchResult/",
+                url: "http://localhost:1337/searchResult/",
                 // the URL for the request
                 type: "POST",
                 // whether this is a POST or GET request

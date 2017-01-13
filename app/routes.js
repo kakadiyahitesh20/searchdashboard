@@ -1,3 +1,5 @@
+
+
 var connection = require('./config');
 module.exports = function(app) {
     var sess;
@@ -16,19 +18,13 @@ module.exports = function(app) {
         if(sess.email)
         {
             connection.query("select * from  users where email = '"+sess.email+"'",function(err,rows) {
-                //connection.query("SELECT category.id,category.name as categoryname,subcategory.id as subcategoryid,subcategory.name as subcategoryname,category.description as categorydescription,subcategory.description as subcategorydescription FROM category INNER JOIN subcategory ON category.id=subcategory.category_id", function (err, result2) {
                 connection.query("select * from  category",function(err,result2) {
                     connection.query("select * from  subcategory",function(err,result3) {
-                        console.log(result3);
-                        // var usersinfo = JSON.stringify(rows);
-                        // console.log(usersinfo);
-                        //res.render('profile',{usersinfo:rows,users: users});
 
-                        res.render('dashboard', {user: "Great User", session: req.session, usersinfo: rows,categorylist:result2,subcategorylist:result3});
+                        res.render('dashboard', {session: req.session, usersinfo: rows,categorylist:result2,subcategorylist:result3});
                     });
                 });
             });
-            //res.redirect('dashboard');
         }
         else
         {
@@ -36,25 +32,28 @@ module.exports = function(app) {
         }
 
     });
-// Register page
+
+    // Load Register page
     app.get('/register', function (req, res) {
         sess = req.session;
         if (sess.email) {
             res.redirect('/dashboard');
         }
         else {
-            res.render('register', {user: "Great User", title: "homepage"});
+            res.render('register', {title: "Register"});
         }
     });
+    // Load Forogt password page
     app.get('/forgot_password', function (req, res) {
         sess = req.session;
         if (sess.email) {
             res.redirect('/dashboard');
         }
         else {
-            res.render('forgot_password', {user: "Great User", title: "forgot password"});
+            res.render('forgot_password', {title: "forgot password"});
         }
     });
+    // Load contact page
     app.get('/contact', function (req, res) {
         sess = req.session;
         if (sess.email) {
@@ -64,6 +63,8 @@ module.exports = function(app) {
             res.render('contact', {title: "Contact"});
         }
     });
+
+    // Redirect homaepage after logout
     app.get('/logout', function (req, res) {
 
         req.session.destroy(function (err) {
@@ -76,6 +77,8 @@ module.exports = function(app) {
         });
 
     });
+
+    // Load about us page
     app.get('/aboutus', function (req, res) {
         sess = req.session;
         if (sess.email) {
@@ -86,6 +89,7 @@ module.exports = function(app) {
         }
     });
 
+    // Load Home page
     app.get('/',function(req,res){
         sess=req.session;
         if(sess.email)
@@ -96,6 +100,8 @@ module.exports = function(app) {
             res.render('index');
         }
     });
+
+    // Load Dashboard
     app.get('/dashboard', function (req, res) {
         sess = req.session;
         if (sess.email) {
@@ -104,10 +110,6 @@ module.exports = function(app) {
                 connection.query("select * from  category", function (err, result2) {
                     connection.query("select * from  subcategory", function (err, result3) {
                         console.log(result3);
-                        // var usersinfo = JSON.stringify(rows);
-                        // console.log(usersinfo);
-                        //res.render('profile',{usersinfo:rows,users: users});
-
                         res.render('dashboard', {
                             user: "Great User",
                             session: req.session,
@@ -118,7 +120,6 @@ module.exports = function(app) {
                     });
                 });
             });
-            //res.redirect('dashboard');
         }
         else {
             res.redirect('/');
@@ -129,9 +130,6 @@ module.exports = function(app) {
         sess = req.session;
         if (sess.email) {
             connection.query("select * from  users where email = '" + sess.email + "'", function (err, rows) {
-                //console.log(rows);
-                // var usersinfo = JSON.stringify(rows);
-                // console.log(usersinfo);
                 res.render('live-chat', {usersinfo: rows});
             });
         }
@@ -143,9 +141,6 @@ module.exports = function(app) {
         sess = req.session;
         if (sess.email) {
             connection.query("select * from  users where email = '" + sess.email + "'", function (err, rows) {
-                //console.log(rows);
-                // var usersinfo = JSON.stringify(rows);
-                // console.log(usersinfo);
                 res.render('admin-live-chat', {usersinfo: rows});
             });
         }
@@ -153,6 +148,8 @@ module.exports = function(app) {
             res.redirect('admin');
         }
     });
+
+    // Load admin page
     app.get('/admin', function (req, res) {
         sess = req.session;
         if (sess.email) {
@@ -162,24 +159,16 @@ module.exports = function(app) {
             res.render('admin');
         }
     });
+
+    // Load admin Dahsboard
     app.get('/admin-dashboard', function (req, res) {
         sess = req.session;
         if (sess.email) {
-            /*connection.query("select * from  users where email = '"+sess.email+"'",function(err,rows) {
-             res.render('admin-dashboard', {user: "Great User", session: req.session, usersinfo: rows});
-             });*/
             connection.query("select * from  users where email = '" + sess.email + "'", function (err, result1) {
                 connection.query("select * from  category", function (err, result2) {
                     res.render('admin-dashboard', {usersinfo: result1, category: result2});
                 });
             });
-            /*async.parallel([
-             function(callback) { connection.query("select * from  category",result) }
-             /!*function(callback) { db.query(QUERY2, callback) }*!/
-             ], function(err, results) {
-             console.log(results);
-             res.render('admin-dashboard', { usersinfo : results[0] });
-             });*/
         }
         else {
             res.redirect('/admin');
@@ -189,39 +178,23 @@ module.exports = function(app) {
         sess = req.session;
         if (sess.email) {
             connection.query("select * from  users where email = '" + sess.email + "'", function (err, rows) {
-                //console.log(rows);
-                // var usersinfo = JSON.stringify(rows);
-                // console.log(usersinfo);
                 res.render('profile', {usersinfo: rows});
             });
-
-            //res.render('index', {data : testimonials});
-            //res.redirect('dashboard');
         }
         else {
             res.redirect('/login');
         }
-
-
     });
     app.get('/editprofile', function (req, res) {
         sess = req.session;
         if (sess.email) {
             connection.query("select * from  users where email = '" + sess.email + "'", function (err, rows) {
-                //console.log(rows);
-                // var usersinfo = JSON.stringify(rows);
-                // console.log(usersinfo);
                 res.render('editprofile', {usersinfo: rows});
             });
-
-            //res.render('index', {data : testimonials});
-            //res.redirect('dashboard');
         }
         else {
             res.redirect('/login');
         }
-
-
     });
     app.get('/UserList', function (req, res) {
         sess = req.session;
@@ -251,18 +224,14 @@ module.exports = function(app) {
             res.redirect('/login');
         }
     });
+
+    // Load change passoword page
     app.get('/ChangePassword', function (req, res) {
         sess = req.session;
         if (sess.email) {
             connection.query("select * from  users where email = '" + sess.email + "'", function (err, rows) {
-                //console.log(rows);
-                // var usersinfo = JSON.stringify(rows);
-                // console.log(usersinfo);
                 res.render('ChangePassword', {usersinfo: rows});
             });
-
-            //res.render('index', {data : testimonials});
-            //res.redirect('dashboard');
         }
         else {
             res.redirect('/login');
