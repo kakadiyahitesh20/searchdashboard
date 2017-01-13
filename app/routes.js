@@ -127,6 +127,7 @@ module.exports = function(app) {
         }
 
     });
+	// load live chat page
     app.get('/live-chat', function (req, res) {
         sess = req.session;
         if (sess.email) {
@@ -138,7 +139,7 @@ module.exports = function(app) {
             res.redirect('login');
         }
     });
-
+	// load admin live chat page
     app.get('/admin-live-chat', function (req, res) {
         sess = req.session;
         if (sess.email) {
