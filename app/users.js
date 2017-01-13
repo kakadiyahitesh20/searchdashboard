@@ -5,6 +5,8 @@ var crypto = require('crypto');
 var connection = require('./config');
 module.exports = function(app) {
 
+    // Post admin login method
+
     app.post('/adminlogin', function (req, res) {
 
         var hashnew = crypto.createHash('md5').update(req.body.pass).digest("hex");
@@ -27,6 +29,9 @@ module.exports = function(app) {
         });
 
     });
+
+    // Post login method
+
     app.post('/login', function (req, res) {
 
         var hashnew = crypto.createHash('md5').update(req.body.pass).digest("hex");
@@ -38,7 +43,6 @@ module.exports = function(app) {
             if (err)
                 return done(err);
             if (numRows == 0) {
-                // return done(null, false, req.flash('signupMessage', 'That email is already taken.'));
                 res.end('Please enter correct credentials.');
             }
             else {
@@ -48,6 +52,9 @@ module.exports = function(app) {
             }
         });
     });
+
+    // Post Forgot password method
+
     app.post('/fpassword', function (req, res) {
 
         connection.query("select * from users where email = '" + req.body.email + "'", function (err, rows) {
@@ -62,6 +69,9 @@ module.exports = function(app) {
             }
         });
     });
+
+    // Post Main Category method
+
     app.post('/addCategory', function (req, res) {
         var queryString = "insert into category(name,description,website) values('" + req.body.category + "','" + req.body.description + "','" + req.body.website + "')";
         console.log(queryString);
@@ -86,6 +96,9 @@ module.exports = function(app) {
             }
         });
     });
+
+    // Post Remove category
+
     app.post('/removeCategory', function (req, res) {
         connection.query("DELETE FROM category WHERE id= '" + req.body.categoryid + "'", function (err, result2) {
             connection.query("DELETE FROM subcategory WHERE category_id='" + req.body.categoryid + "'", function (err, result3) {
@@ -94,6 +107,9 @@ module.exports = function(app) {
             });
         });
     });
+
+    // Post search keyword result
+
     app.post('/searchResult', function (req, res) {
         console.log(req.body.keyword);
         var queryString = "SELECT * FROM category inner JOIN subcategory ON category.id=subcategory.category_id WHERE category.description or subcategory.description Like '%" + req.body.keyword + "%'";
@@ -107,6 +123,9 @@ module.exports = function(app) {
             }
         });
     });
+
+    // Post signup method
+
     app.post('/signup', function (req, res) {
 
         connection.query("select * from  users where email = '" + req.body.email + "'", function (err, rows) {
