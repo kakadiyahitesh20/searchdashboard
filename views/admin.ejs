@@ -36,14 +36,14 @@
 
 </html>
 <script>
+
+    // On submit click method to get value and validation
+
     $(document).ready(function(){
         var email,pass;
         $("#submit").click(function(){
             email=$("#email").val();
             pass=$("#password").val();
-            /*
-             * Perform some validation here.
-             */
             if(email == 'admin@searchdashboard.com') {
             $.post("/adminlogin",{email:email,pass:pass},function(data){
                 if(data==='done')

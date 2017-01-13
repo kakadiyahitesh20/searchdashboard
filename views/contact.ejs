@@ -51,16 +51,15 @@
 <% include footer %>
 </html>
 <script>
+
+    // On submit click method to get value and validation
+
     $(document).ready(function(){
         var name,email,message;
         $("#submit").click(function(){
             name = $("#name").val();
             email=$("#email").val();
             message=$("#smessage").val();
-
-            /*
-             * Perform some validation here.
-             */
             $.post("/contacts",{name:name,email:email,message:message},function(data){
                 if(data==='success')
                 {

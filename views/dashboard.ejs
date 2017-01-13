@@ -5,8 +5,6 @@
 </head>
 <body  ng-app="myapp">
 
-
-
 <% include header_logged.ejs %>
         <!---->
 <div class="container-fluid">
@@ -99,13 +97,13 @@
 </body>
 </html>
 <script>
+
+    // On submit click method to render data and validation
+
     $(document).ready(function(){
         $(".panel").css("margin-top","70px")
         $("#submit").click(function(){
             var search = $("#search").val();
-            /*
-             * Perform some validation here.
-             */
             getAndRenderData(search);
         });
         function getAndRenderData(search) {
@@ -119,7 +117,6 @@
                 data: data,
                 // the type of data we expect back
                 success: function (responseJson) {
-                   // alert(responseJson);
                     var obj = jQuery.parseJSON(responseJson);
                     var objlength = obj.length;
                     if( objlength > 0) {
@@ -132,7 +129,6 @@
                         //
                         $('#searchresult').append('<div class="col-md-12"><p>Sorry...No Keyword found..!! Search another keyword</p></div>');
                     }
-
                 },
                 error: function (xhr, status) {
                     // code run if request fails; raw request and status
@@ -143,53 +139,5 @@
                 }
             })
         }
-
-
-
-
-        /*
-        getGoogleSearchResult('text');
-        function getGoogleSearchResults(q) {
-
-            // Get the API key from Google's developer console
-            // Get the CSE ID from google.com/cse
-
-            var api = "https://www.googleapis.com/customsearch/v1?key="
-                + KEY + "&cx=" + CSE + "&q=" + encodeURIComponent(q);
-
-            try {
-
-                var response = UrlFetchApp.fetch(api, {
-                    muteHttpExceptions: true
-                });
-
-                if (response.getResponseCode() == 200) {
-
-                    var content = JSON.parse(response);
-
-                    // Did the search return any results?
-                    if (content.searchInformation.totalResults > 0) {
-
-                        var count = content.items.length;
-
-                        for (var i = 0; i < count; i++) {
-
-                            // Save the page title, description and hyperlink
-                            Logger.log(content.items[i].title);
-                            Logger.log(content.items[i].snippet);
-                            Logger.log(content.items[i].link);
-                        }
-                    }
-                }
-            } catch (f) {
-                Logger.log(f.toString());
-            }
-
-        }*/
-
-
-
-
-
     });
 </script>

@@ -18,12 +18,11 @@ app.use("/",router);
 app.use(express.static('views'));
 app.set('view engine', 'ejs');
 var path = __dirname + '/views/';
-// usernames which are currently connected to the chat
-var connection = require('./app/config');
-var routes = require('./app/routes')(app);
-var post = require('./app/users')(app);
+
+var connection = require('./app/config');  // added connection file
+var routes = require('./app/routes')(app);  // added router file
+var post = require('./app/users')(app);    // added post method file
 var usernames = {};
-// rooms which are currently available in chat
 var rooms = ['Room'];
 
 io.sockets.on('connection', function (socket) {
@@ -64,7 +63,3 @@ io.sockets.on('connection', function (socket) {
 });
 var port = process.env.PORT || 1337;
 http.listen(port);
-/*
-http.listen(80,'13.84.42.35',function(){
-  console.log("Live at Port 3000");
-});*/
