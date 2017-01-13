@@ -3,6 +3,7 @@
 var connection = require('./config');
 module.exports = function(app) {
     var sess;
+    // load login page
     app.get('/login', function (req, res) {
         sess = req.session;
         if (sess.email) {
@@ -12,7 +13,7 @@ module.exports = function(app) {
             res.render('login');
         }
     });
-
+    // load dashboard page
     app.get('/dashboard',function(req,res){
         sess=req.session;
         if(sess.email)
@@ -137,6 +138,7 @@ module.exports = function(app) {
             res.redirect('login');
         }
     });
+
     app.get('/admin-live-chat', function (req, res) {
         sess = req.session;
         if (sess.email) {
@@ -174,6 +176,7 @@ module.exports = function(app) {
             res.redirect('/admin');
         }
     });
+    // load profile page
     app.get('/profile', function (req, res) {
         sess = req.session;
         if (sess.email) {
@@ -185,6 +188,7 @@ module.exports = function(app) {
             res.redirect('/login');
         }
     });
+    // load edit profile page
     app.get('/editprofile', function (req, res) {
         sess = req.session;
         if (sess.email) {
@@ -196,6 +200,7 @@ module.exports = function(app) {
             res.redirect('/login');
         }
     });
+    // load User list page
     app.get('/UserList', function (req, res) {
         sess = req.session;
         if (sess.email) {
@@ -210,6 +215,7 @@ module.exports = function(app) {
             res.redirect('/login');
         }
     });
+    // load customer query page
     app.get('/Customer_Query', function (req, res) {
         sess = req.session;
         if (sess.email) {

@@ -84,6 +84,7 @@ module.exports = function(app) {
             }
         });
     });
+    // post added sub category and load function
     app.post('/addSubCategory', function (req, res) {
         var queryString = "insert into subcategory(category_id,name,description,website) values('" + req.body.categoryid + "','" + req.body.subcategory + "','" + req.body.subdescription + "','" + req.body.subwebsite + "')";
         console.log(queryString);
@@ -153,6 +154,7 @@ module.exports = function(app) {
             }
         });
     });
+    // post editinfo function for edit profile
     app.post('/editinfo', function (req, res) {
         var created = new Date();
         var queryString = "update users set name='" + req.body.name + "',dob='" + req.body.dob + "',organization='" + req.body.org + "',created='" + created + "' WHERE email='" + req.body.email + "'";
@@ -166,6 +168,7 @@ module.exports = function(app) {
             }
         });
     });
+    // load contact function
     app.post('/contacts', function (req, res) {
         var queryString = "insert into contactus(name,email,message) values('" + req.body.name + "','" + req.body.email + "','" + req.body.message + "')";
         console.log(queryString);
@@ -178,6 +181,7 @@ module.exports = function(app) {
                     }
                 });
             });
+    // load remove user function to maintain user list
     app.post('/removeuser', function (req, res) {
         var queryString = "DELETE FROM users WHERE id='" + req.body.id + "'";
         console.log(queryString);
@@ -190,6 +194,7 @@ module.exports = function(app) {
             }
         });
     });
+    // load change password function for change user password
     app.post('/changePassword', function (req, res) {
         var hashnew = crypto.createHash('md5').update(req.body.password).digest("hex");
         var queryString = "UPDATE users SET password='" + hashnew + "' WHERE email='" + sess.email + "'";
